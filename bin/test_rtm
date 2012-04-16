@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+var RTM = require('../lib/rtm.js').RTM;
+var async = require('async');
+
+var API_KEY = '4f918ac32008d91c3855b57be3b3ce24';
+var SECRET = '6e1a4c9061f24cc2'
+
+var tokens = {};
+
+var rtm_client = new RTM(API_KEY, SECRET);
+async.series([
+    function(callback) {
+        rtm_client.authenticate(function (err, token, user_id, user_name) {
+            if (err) {
+              return console.log('Error retrieving token', err);
+            }
+            tokens[user_name] = {
+              token: token,
+              user_id: user_name
+            };
+            console.log('Stored a token', tokens);
+            rtm_client.auth_token = token;
+            callback();
+        });
+    },
+    function(callback) {
+        rtm_client.getLists(function(err, lists) {
+            console.log('GOT LISTS', lists);
+            callback()
+        });
+    }
+]);
+
+
+
+

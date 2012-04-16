@@ -1,0 +1,10 @@
+{
+  "name": "callyourmom",
+  "version": "0.0.1",
+  "dependencies": {
+    "restler": "2.0.0",
+    "async": "0.1.18",
+    "xml2js": "0.1.13",
+    "google-voice", "0.1.5"
+  }
+}
